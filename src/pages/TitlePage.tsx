@@ -1,4 +1,4 @@
-import { Button, Container, Link, Stack, Typography } from "@mui/material";
+import { Button, Container, Link, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 
 export default function TitlePage() {

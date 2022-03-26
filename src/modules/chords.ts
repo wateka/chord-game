@@ -1,4 +1,4 @@
-import { Chord, ChordType } from "@tonaljs/tonal"
+import { Chord } from "@tonaljs/tonal"
 import { chordTypes, tones } from "./constraints"
 
 // ChordType.add(["1P", "3m", "5m", "7m"], ["m7b5"], "half diminished")

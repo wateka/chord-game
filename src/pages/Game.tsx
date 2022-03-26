@@ -1,6 +1,6 @@
 import { PlayCircleOutlined } from "@mui/icons-material"
 import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 import ChoiceButton from "../components/choiceButton/ChoiceButton"
 import { useQuestion } from "../hooks/useQuestion"
@@ -9,7 +9,6 @@ export default function Game() {
   const [quitModalState, setQuitModalState] = useState(false)
   const navigate = useNavigate()
   const { answerAcceptable, questionNumber, choices, answerIndex, userAnswerIndex, playAnswerChord, playChoiceChord, changeToNextQuestion, judgeAnswer} = useQuestion()
-  useEffect(() => changeToNextQuestion(), [])
 
   const handleChoiceClick = (index: number) => {
     judgeAnswer(index)
