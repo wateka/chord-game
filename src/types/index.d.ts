@@ -1,4 +1,8 @@
+declare module '*.mp3'
+
 type Tone = string
+
+type Pitch = string
 
 type ChordType = string
 
