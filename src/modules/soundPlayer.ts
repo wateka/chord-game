@@ -7,7 +7,7 @@ import G3 from '../audio/G3.mp3'
 import A3 from '../audio/A3.mp3'
 import B3 from '../audio/B3.mp3'
 import C4 from '../audio/C4.mp3'
-import { getChordNotes } from './chords'
+import { getChordPitches } from './chords'
 
 const noteLength = "1n"
 
@@ -16,13 +16,13 @@ const pianoSampler = new Tone.Sampler({
 }).toDestination()
 
 export const playChord = (chord: Chord) => {
-  getChordNotes(chord).forEach(note => {
+  getChordPitches(chord).forEach(note => {
     pianoSampler.triggerAttackRelease(note, noteLength)
   })
 }
 
 export const playChordStep = (chord: Chord) => {
-  getChordNotes(chord).forEach((note, index) => {
+  getChordPitches(chord).forEach((note, index) => {
     pianoSampler.triggerAttackRelease(note, noteLength, index)
   })
 }

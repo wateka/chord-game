@@ -43,7 +43,7 @@ export default function Game() {
         </Stack>
 
         <Stack spacing={2} mb={2}>
-          {choices.map((choice: string, index: number) => 
+          {choices.map((choice, index) => 
             <ChoiceButton
               key={index}
               isEnabled={answerAcceptable}
@@ -52,7 +52,8 @@ export default function Game() {
               onClick={() => handleChoiceClick(index)}
               onPlay={() => handleChoicePlay(index)}
             >
-              {choice}
+              {choice.chordName}
+              <Typography ml={2} variant="body2">{!answerAcceptable && choice.chordNoteString}</Typography>
             </ChoiceButton>
           )}
         </Stack>

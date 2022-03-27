@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getRandomChords, toChordName } from "../modules/chords"
+import { getChordTones, getRandomChords, toChordName } from "../modules/chords"
 import { playChord, playChordStep } from "../modules/soundPlayer"
 
 export const useQuestion = () => {
@@ -11,8 +11,10 @@ export const useQuestion = () => {
   const [answerIndex, setAnswerIndex] = useState(0)
   const [userAnswerIndex, setUserAnswerIndex] = useState<number | null>(0)
   
-  const answer = toChordName(choiceChords[answerIndex])
-  const choices = choiceChords.map(chord => toChordName(chord))
+  const choices = choiceChords.map(chord => ({
+    chordName: toChordName(chord),
+    chordNoteString: `[${getChordTones(chord).join(", ")}]`
+  }))
   
   useEffect(() => changeToNextQuestion(), [])
 
@@ -40,7 +42,7 @@ export const useQuestion = () => {
   }
 
   return {
-    answerAcceptable, questionNumber, answerIndex, userAnswerIndex, choices, answer, 
+    answerAcceptable, questionNumber, answerIndex, userAnswerIndex, choices,
     isChoiceCorrect, playAnswerChord, playChoiceChord, playAnswerChordStep, playChoiceChordStep, judgeAnswer, changeToNextQuestion
   }
 }

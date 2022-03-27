@@ -30,9 +30,13 @@ export const getRandomChords = (num: number): Chord[] => {
   return new Array(num).fill(0).map((_, i) => ({root, chordType: types[i]}))
 }
 
-export const getChordNotes = (chord: Chord): Pitch[] => {
+export const getChordPitches = (chord: Chord): Pitch[] => {
   const rootPitch = chord.root + (['G', 'Ab', 'A', 'Bb', 'B'].includes(chord.root) ? 2 : 3)
   return Chord.getChord(chord.chordType, rootPitch).notes
+}
+
+export const getChordTones = (chord: Chord): Tone[] => {
+  return getChordPitches(chord).map(pitch => pitch.slice(0, -1))
 }
 
 export const toChordName = (chord: Chord) => chord.root + chord.chordType
