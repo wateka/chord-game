@@ -6,10 +6,7 @@ type Pitch = string
 
 type ChordType = string
 
-type Chord = {
-  root: Tone,
-  chordType: ChordType
-}
+type Chord = string
 
 type Question = {
   correctAnswer: number,

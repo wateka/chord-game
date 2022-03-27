@@ -1,14 +1,19 @@
 import { PlayCircleOutlined } from "@mui/icons-material"
 import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, Typography } from "@mui/material"
 import { useState } from "react"
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import ChoiceButton from "../components/choiceButton/ChoiceButton"
 import { useQuestion } from "../hooks/useQuestion"
 
 export default function Game() {
   const [quitModalState, setQuitModalState] = useState(false)
   const navigate = useNavigate()
-  const { answerAcceptable, questionNumber, choices, answerIndex, userAnswerIndex, playAnswerChord, playChoiceChord, changeToNextQuestion, judgeAnswer} = useQuestion()
+  const params = useParams()
+  const difficulty = params.difficulty
+  const {
+    answerAcceptable, questionNumber, choices, answerIndex, userAnswerIndex,
+    playAnswerChord, playChoiceChord, changeToNextQuestion, judgeAnswer
+  } = useQuestion(difficulty || "easy")
 
   const handleChoiceClick = (index: number) => {
     judgeAnswer(index)
@@ -37,6 +42,12 @@ export default function Game() {
   return (
     <>
       <Container>
+        <Typography variant="h5" component="h2" mb={2}>
+          難易度：
+          {difficulty == "easy" && "やさしい"}
+          {difficulty == "normal" && "ふつう"}
+          {difficulty == "difficult" && "難しい"}
+        </Typography>
         <Stack direction="row" spacing={2} alignItems="center" mb={2}>
           <Typography>第{questionNumber + 1}問</Typography>
           <Button onClick={playAnswerChord} startIcon={<PlayCircleOutlined />}>コードを再生</Button>

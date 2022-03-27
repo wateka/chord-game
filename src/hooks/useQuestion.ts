@@ -2,12 +2,12 @@ import { useEffect, useState } from "react"
 import { getChordTones, getRandomChords, toChordName } from "../modules/chords"
 import { playChord, playChordStep } from "../modules/soundPlayer"
 
-export const useQuestion = () => {
+export const useQuestion = (difficulty: string) => {
   const choiceNumber = 4
 
   const [answerAcceptable, setAnswerAcceptable] = useState(true)
   const [questionNumber, setQuestionNumber] = useState(-1)
-  const [choiceChords, setChoiceChords] = useState<Chord[]>([{ root: "C", chordType: "" }])
+  const [choiceChords, setChoiceChords] = useState<Chord[]>(["C"])
   const [answerIndex, setAnswerIndex] = useState(0)
   const [userAnswerIndex, setUserAnswerIndex] = useState<number | null>(0)
   
@@ -36,7 +36,7 @@ export const useQuestion = () => {
   const changeToNextQuestion = () => {
     setAnswerAcceptable(true)
     setQuestionNumber(questionNumber + 1)
-    setChoiceChords(getRandomChords(choiceNumber))
+    setChoiceChords(getRandomChords(choiceNumber, difficulty))
     setAnswerIndex(Math.floor(Math.random() * choiceNumber))
     setUserAnswerIndex(null)
   }
